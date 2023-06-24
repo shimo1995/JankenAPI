@@ -16,8 +16,8 @@ import java.util.Optional;
  */
 public class Function {
     /**
-     * This function listens at endpoint "/api/HttpExample". Two ways to invoke it using "curl" command in bash:
-     * 1. curl -d "HTTP Body" {your host}/api/HttpExample
+     * This function listens at endpoint "/api/Janken". Two ways to invoke it using "curl" command in bash:
+     * 1. curl -d "HTTP Body" {your host}/api/Janken
      * 2. curl "{your host}/api/HttpExample?name=HTTP%20Query"
      */
     @FunctionName("Janken")
@@ -30,7 +30,7 @@ public class Function {
             final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
 
-        // Parse query parameter
+        // Parse move parameter
         final String move = request.getBody().orElse(null);
 
         if (move == null) {
