@@ -1,0 +1,2 @@
+# JankenAPI
+じゃんけんをするためのAPI
