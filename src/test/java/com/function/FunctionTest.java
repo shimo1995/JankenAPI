@@ -26,11 +26,7 @@ public class FunctionTest {
         @SuppressWarnings("unchecked")
         final HttpRequestMessage<Optional<String>> req = mock(HttpRequestMessage.class);
 
-        final Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("name", "Azure");
-        doReturn(queryParams).when(req).getQueryParameters();
-
-        final Optional<String> queryBody = Optional.empty();
+        final Optional<String> queryBody = Optional.of("rock"); // Change the request body here
         doReturn(queryBody).when(req).getBody();
 
         doAnswer(new Answer<HttpResponseMessage.Builder>() {
@@ -48,6 +44,7 @@ public class FunctionTest {
         final HttpResponseMessage ret = new Function().run(req, context);
 
         // Verify
-        assertEquals(ret.getStatus(), HttpStatus.BAD_REQUEST);
+        assertEquals(ret.getStatus(), HttpStatus.OK); // Change the expected status here
+        assertEquals(ret.getBody(), "scissors"); // Change the expected response body here
     }
 }
