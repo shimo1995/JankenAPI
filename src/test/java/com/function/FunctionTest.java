@@ -18,10 +18,10 @@ import static org.mockito.Mockito.*;
  */
 public class FunctionTest {
     /**
-     * Unit test for HttpTriggerJava method.
+     * Unit test for JankenAPI method.
      */
     @Test
-    public void testHttpTriggerJava() throws Exception {
+    public void testJankenAPI() throws Exception {
         // Setup
         @SuppressWarnings("unchecked")
         final HttpRequestMessage<Optional<String>> req = mock(HttpRequestMessage.class);
@@ -45,6 +45,6 @@ public class FunctionTest {
 
         // Verify
         assertEquals(ret.getStatus(), HttpStatus.OK); // Change the expected status here
-        assertEquals(ret.getBody(), "scissors"); // Change the expected response body here
+        assertEquals(ret.getBody(), "\"scissors\""); // Change the expected response body here
     }
 }

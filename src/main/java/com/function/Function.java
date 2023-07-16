@@ -16,18 +16,16 @@ import java.util.Optional;
  */
 public class Function {
     /**
-     * This function listens at endpoint "/api/JankenAPI". Two ways to invoke it using "curl" command in bash:
-     * 1. curl -d "HTTP Body" {your host}/api/JankenAPI
-     * 2. curl "{your host}/api/HttpExample?name=HTTP%20Query"
+     * This function listens at endpoint "/api/JankenAPI". 
      */
     @FunctionName("JankenAPI")
     public HttpResponseMessage run(
-            @HttpTrigger(
-                name = "req",
-                methods = {HttpMethod.POST},
-                authLevel = AuthorizationLevel.ANONYMOUS)
-                HttpRequestMessage<Optional<String>> request,
-            final ExecutionContext context) {
+    @HttpTrigger(
+        name = "req",
+        methods = {HttpMethod.POST},
+        authLevel = AuthorizationLevel.ANONYMOUS)
+        HttpRequestMessage<Optional<String>> request,
+    final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
 
         // Parse move parameter
@@ -35,8 +33,9 @@ public class Function {
 
         if (move == null) {
             return request.createResponseBuilder(HttpStatus.BAD_REQUEST)
-                    .body("Please pass a valid move in the request body: rock, scissors, or paper.")
-                    .build();
+                .body("Please pass a valid move in the request body: rock, scissors, or paper.")
+                .header("Content-Type", "text/plain")
+                .build();
         } else {
             String result;
             switch (move) {
@@ -55,8 +54,9 @@ public class Function {
             }
 
             return request.createResponseBuilder(HttpStatus.OK)
-                    .body(result)
-                    .build();
+                .body("\"" + result + "\"")
+                .header("Content-Type", "application/json")
+                .build();
         }
     }
 }
